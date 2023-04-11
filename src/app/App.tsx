@@ -27,15 +27,15 @@ const root = createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <AppSuspense fallback={<></>}>
+      {/* <AppSuspense fallback={<></>}>
         <Header />
-      </AppSuspense>
+      </AppSuspense> */}
       <AppSuspense fallback={<></>}>
         <RouterOutlet routes={appRoutes} />
       </AppSuspense>
-      <AppSuspense fallback={<></>}>
+      {/* <AppSuspense fallback={<></>}>
         <Footer />
-      </AppSuspense>
+      </AppSuspense> */}
     </BrowserRouter>
   </Provider>
 );
