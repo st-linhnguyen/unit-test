@@ -2,7 +2,6 @@ import { AuthStorageService, AuthStorage } from '../../core/services/authStorage
 
 describe('AuthStorageService', () => {
   let authStorageService: AuthStorageService;
-  let storageMock: jest.Mocked<AuthStorage>;
   let localStorageMock;
 
   beforeEach(() => {
@@ -32,39 +31,37 @@ describe('AuthStorageService', () => {
       };
     })();
     Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-
-    storageMock = {
-      setToken: jest.fn(),
-      getToken: jest.fn(),
-      removeToken: jest.fn(),
-    };
     authStorageService = new AuthStorageService();
   });
 
-  describe('setToken', () => {
-    it('should set token in storage', () => {
-      authStorageService.setToken('test-token');
-      expect(storageMock.setToken).toHaveBeenCalledWith('test-token');
-    });
-
-    it('should not set token in storage if it is undefined', () => {
-      authStorageService.setToken(undefined);
-      expect(storageMock.setToken).not.toHaveBeenCalled();
-    });
+  afterEach(() => {
+    localStorage.clear();
   });
 
-  describe('getToken', () => {
-    it('should get token from storage', () => {
-      storageMock.getToken.mockReturnValueOnce();
-      const result = authStorageService.getToken();
-      expect(result).toEqual('test-token');
-    });
+  it('should set ACCESS_TOKEN in local storage', () => {
+    const mockAccessToken = 'mock_access_token';
+    jest.spyOn(localStorage, 'setItem');
+
+    authStorageService.setToken(JSON.stringify(mockAccessToken));
+
+    expect(localStorage.setItem).toHaveBeenCalledWith('token', JSON.stringify(mockAccessToken));
   });
 
-  describe('removeToken', () => {
-    it('should remove token from storage', () => {
-      authStorageService.removeToken();
-      expect(storageMock.removeToken).toHaveBeenCalled();
-    });
+  it('should get ACCESS_TOKEN from local storage', () => {
+    const mockAccessToken = 'mock_access_token';
+    jest.spyOn(localStorage, 'getItem').mockReturnValueOnce(JSON.stringify(mockAccessToken));
+
+    const accessToken = authStorageService.getToken();
+
+    expect(localStorage.getItem).toHaveBeenCalledWith('token');
+    expect(accessToken).toEqual(JSON.stringify(mockAccessToken));
+  });
+
+  it('should remove ACCESS_TOKEN from local storage', () => {
+    jest.spyOn(localStorage, 'removeItem');
+
+    authStorageService.removeToken();
+
+    expect(localStorage.removeItem).toHaveBeenCalledWith('token');
   });
 });
