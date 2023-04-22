@@ -8,6 +8,6 @@ export default class AuthSample {
   }
 
   getAuthHeader() {
-    return `Bearer ${this.authStorage.getToken()}`;
+    return this.authStorage.getToken();
   }
 }
