@@ -2,7 +2,7 @@ import { describe, test } from '@jest/globals';
 import { setArray, isDuplicated, isConsecutive } from './array';
 
 describe('Test is increasing array', () => {
-  const arr = [1, 2, 3, 9, 7];
+  const arr = [1, 2, 3, 4, 5];
   const size = 5;
 
   test('Should return true for an array', () => {
