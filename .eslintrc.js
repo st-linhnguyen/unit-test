@@ -47,5 +47,6 @@ module.exports = {
     // es 6
     'arrow-spacing': [1, { 'before': true, 'after': true }],
     'no-duplicate-imports': [1],
+    '@typescript-eslint/no-empty-function': 'off'
   },
 };
