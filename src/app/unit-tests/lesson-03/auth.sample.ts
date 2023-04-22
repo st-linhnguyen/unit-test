@@ -8,7 +8,6 @@ export default class AuthSample {
   }
 
   getAuthHeader() {
-    console.log(999);
     return `Bearer ${this.authStorage.getToken()}`;
   }
 }
