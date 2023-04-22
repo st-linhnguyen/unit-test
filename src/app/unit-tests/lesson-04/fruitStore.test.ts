@@ -21,4 +21,16 @@ describe('Fruit store', () => {
     const orangeCost = store.getDiscount('orange', orangeAmount);
     expect(store.checkout()).toEqual(appleCost + orangeCost);
   });
+
+  test('Update price after remove from cart', () => {
+    const appleAmount = 2;
+    const orangeAmount = 1;
+    store.buyFruits('apple', appleAmount);
+    store.buyFruits('orange', orangeAmount);
+    const appleCost = store.getDiscount('apple', appleAmount) * appleAmount;
+    const orangeCost = store.getDiscount('orange', orangeAmount);
+    expect(store.checkout()).toEqual(appleCost + orangeCost);
+    store.removeFromCart('orange');
+    expect(store.checkout()).toEqual(appleCost);
+  })
 });
