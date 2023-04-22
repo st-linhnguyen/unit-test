@@ -1,4 +1,4 @@
-import { AuthStorageService, AuthStorage } from '../../core/services/authStorage.service';
+import { AuthStorageService } from '../../core/services/authStorage.service';
 
 describe('AuthStorageService', () => {
   let authStorageService: AuthStorageService;
@@ -9,11 +9,11 @@ describe('AuthStorageService', () => {
       let store = {};
 
       return {
-        getItem(key) {
+        getItem(key: string) {
           return store[key];
         },
 
-        setItem(key, value) {
+        setItem(key: string, value: string) {
           store[key] = value;
         },
 
@@ -21,7 +21,7 @@ describe('AuthStorageService', () => {
           store = {};
         },
 
-        removeItem(key) {
+        removeItem(key: string) {
           delete store[key];
         },
 
