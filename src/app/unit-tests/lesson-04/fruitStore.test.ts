@@ -2,7 +2,7 @@ import { describe, test } from '@jest/globals';
 import FruitStore from './fruitStore';
 
 describe('Fruit store', () => {
-  let store;
+  let store = null;
 
   beforeEach(() => {
     store = new FruitStore();
@@ -32,5 +32,5 @@ describe('Fruit store', () => {
     expect(store.checkout()).toEqual(appleCost + orangeCost);
     store.removeFromCart('orange');
     expect(store.checkout()).toEqual(appleCost);
-  })
+  });
 });
