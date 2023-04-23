@@ -13,7 +13,7 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     // possible-errors
-    'no-console': [1],
+    'no-console': 'off',
 
     // best-practices
     curly: [2],
